@@ -1,0 +1,11 @@
+[package]
+name = "clnc"
+version = "0.1.0"
+authors = ["einzigartigerName"]
+edition = "2018"
+
+[dependencies]
+prettytable-rs = "^0.8"
+
+[profile.release]
+lto = true
