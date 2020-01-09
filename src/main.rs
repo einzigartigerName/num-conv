@@ -7,7 +7,7 @@ use prettytable::{Table, format};
 fn main() {
     let mut table = Table::new();
     table.set_format(*format::consts::FORMAT_NO_BORDER_LINE_SEPARATOR);
-    table.set_titles(row!["Decimal", "Hexadecimal", "Octal", "Binary"]);
+    table.set_titles(row![bc => "Decimal", "Hexadecimal", "Octal", "Binary"]);
 
     // for each argument (skip first because it's the program name)
     for arg in args().skip(1){
@@ -34,12 +34,12 @@ fn main() {
         // actual matching starts here
         {
             Ok(value) => 
-                table.add_row(row![format!("{}", value),
+                table.add_row(row![r => format!("{}", value),
                     format!("{:#X}", value),
                     format!("{:#o}", value),
                     format!("{:#b}", value)]),
             // ERROR om conversion
-            _ => table.add_row(row!["Error", "while", "converting", format!("\"{}\"", &arg)]),
+            _ => table.add_row(row![c => "Error", "while", "converting", format!("\"{}\"", &arg)]),
         };
     }
 
