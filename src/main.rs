@@ -5,6 +5,11 @@ use prettytable::{Table, format};
 
 
 fn main() {
+    if args().len() == 1 {
+        println!("At least one number needs to be passed.");
+        return;
+    }
+
     let mut table = Table::new();
     table.set_format(*format::consts::FORMAT_NO_BORDER_LINE_SEPARATOR);
     table.set_titles(row![bc => "Decimal", "Hexadecimal", "Octal", "Binary"]);
@@ -33,12 +38,14 @@ fn main() {
         }
         // actual matching starts here
         {
+            // Value successfully converted
             Ok(value) => 
                 table.add_row(row![r => format!("{}", value),
                     format!("{:#X}", value),
                     format!("{:#o}", value),
                     format!("{:#b}", value)]),
-            // ERROR om conversion
+
+            // ERROR while converting
             _ => table.add_row(row![c => "Error", "while", "converting", format!("\"{}\"", &arg)]),
         };
     }
